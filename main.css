@@ -2,7 +2,6 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Indie Flower', cursive;
   }
 
 .header {
@@ -32,4 +31,9 @@
 
 .js-quiz-results {
     text-align: center;
+}
+
+.correctAnswer, .wrongAnswer, .overallScore {
+    text-align: center;
+    padding: 20px;
 }

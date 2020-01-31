@@ -13,20 +13,23 @@
 <body>
     <div class="container">
     <header role="banner" class="header">
-        <a href="index.html">
-            <img class="logo" src="Images/The_Simpsons_-_logo.png" alt="The Simpsons logo"/>
-          </a>
+        <h1>THE SIMPSONS</h1>
     </header>
+<!-- Start/launch page -->
     <main class="main">
         <section class="start-quiz">
         <h2>
-            How well do you know the citizens of Springfield? Click the doughunut to find out. Mmm, doughnut...
+            How well do you know the citizens of Springfield? Click the doughnut to find out. Mmm, doughnut...
         </h2>
         </section>
         <section class="quiz-main">
         <form id="js-quiz-launch">
-            <input type="image" src="Images/Doughnut.jpg" alt="Start quiz" aria-pressed="false" class="doughnut-submit"><br>
+            <button type="button" class="startButton">Start</button><br>
         </form>
+<!-- Quiz questions/answers -->        
+        <div class="quiz-question">
+            <h3>This is a question?</h3>
+            </div>
         <form id="js-quiz-questions">
             <fieldset>
             <label class="answer-option">
@@ -49,6 +52,21 @@
             </fieldset>
             </form>
         </section>  
+<!-- Answer feedback pages -->
+        <section class="feedback">
+        <div class="correctAnswer">Cowabunga! <br>
+        <button type=button class="nextButton">Press The Any Key</button>
+        </div>
+        <div class="wrongAnswer">D'oh!<br>
+        <button type=button class="nextButton">Press the Any Key</button>
+        </div>
+        </section>
+<!-- Overall score page -->
+        <div class="overallScore"><h3>Excellent...</h3>
+            <p>You got 8/ 10</p>
+            <button class="restartQuiz">Ready to try again?</button>
+        </div>
+<!-- Score tracker -->
         <section class="js-quiz-results">
             <ul>
                 <li>Question: <span class="questionNumber">0</span>/10</li>
