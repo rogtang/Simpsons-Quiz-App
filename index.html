@@ -4,17 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" type="A quiz app about the Simpsons TV show trivia">
+    <meta name="description" type="A trivia quiz about the Simpsons TV show">
     <title>The Simpsons Quiz</title>
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
     <div class="container">
-
-   
+    <header role="banner" class="header">
+        <a href="index.html">
+            <img class="logo" src="Images/The_Simpsons_-_logo.png" alt="The Simpsons logo"/>
+          </a>
+    </header>
+    <main class="main">
+        <section class="start-quiz">
+        <h2>
+            How well do you know the citizens of Springfield? Click the doughunut to find out. Mmm, doughnut...
+        </h2>
+        </section>
+        <section class="quiz-main">
+        <form id="js-quiz-launch">
+            <input type="image" src="Images/Doughnut.jpg" alt="Start quiz" aria-pressed="false" class="doughnut-submit"><br>
+        </form>
+        <form id="js-quiz-questions">
+            <fieldset>
+            <label class="answer-option">
+            <input type="radio" value="This is a question" name="answer" required>
+            <span>This is a question</span>
+            </label><br>
+            <label class="answer-option">
+                <input type="radio" value="This is a question" name="answer" required>
+                <span>This is a question</span>
+            </label><br>
+            <label class="answer-option">
+                <input type="radio" value="This is a question" name="answer" required>
+                <span>This is a question</span>
+            </label></br>
+            <label class="answer-option">
+                <input type="radio" value="This is a question" name="answer" required>
+                <span>This is a question</span>
+            </label></br>
+            <button type="submit" class="answer-submit">Submit</button>
+            </fieldset>
+            </form>
+        </section>  
+        <section class="js-quiz-results">
+            <ul>
+                <li>Question: <span class="questionNumber">0</span>/10</li>
+                <li>Score: <span class="score">0</span></li>
+            </ul>
+        </section>      
+    </main>
+    </div>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="index.js"></script>
-</div>
 </body>
 </html>
