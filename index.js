@@ -1,5 +1,4 @@
-$( document ).ready(function() {
-  'use strict';
+'use strict';
   
   const STORE = [
   {
@@ -126,22 +125,22 @@ $( document ).ready(function() {
                   
               </fieldset>
             </form>
-            <button id="submit-button" type="submit" form='answerChoices' value='submit'> Choose wisely...</button>
+            <button id="submit-button" type="submit" form='answerChoices' value='submit'>Submit</button>
             </section>`);
   
   }
   
   
-  
+  //this function will validate the answer submitted
   function submitAnswer() {
-    //this function will validate the answer submitted
-    let currentAnswer = $('input[name="questionResponse"]:checked').val();
-    let correct = STORE[questionNumber].correctAnswer;
-    $('.quiz-main').on('submit', function (event) {
+    $('form').on('submit', function(event) {
+      console.log("it's working");
       event.preventDefault();
-      $('.js-quiz-questions').hide();
-      $('.js-quiz-response').show();
-      if (currentAnswer === correct) {
+      $('#js-quiz-questions').hide();
+      $('#js-quiz-response').show();
+      let selectedAnswer = $('input[name="questionResponse"]:checked').closest('label').find('span').text();
+      let correct = STORE[questionNumber].correctAnswer;
+      if (selectedAnswer === correct) {
         rightAnswer();
         updateScore();
       } else {
@@ -150,15 +149,24 @@ $( document ).ready(function() {
     });
   }
   
+  //this function runs if answer is right
   function rightAnswer() {
-    //this function runs if answer is right
-    //html
+    $('#js-quiz-response').html(
+      `<section id="correctScreen">
+    <p> Woohoo!</p>
+    <img class="cowabunga" src="Images/cowabunga_bart.jpg" alt="Bart">
+    <button id="continue-button" type="button">Next</button>
+    </section>`);
   }
-  
+
+  //this function runs if answer is wrong
   function wrongAnswer() {
-    //this function runs if answer is wrong
-    //html
-  
+    $('#js-quiz-response').html(
+      `<section id="incorrectScreen">
+      <p> DOH!</p>
+      <img class="doh" src="Images/D-oh.jpg" alt="Homer">
+      <button id="continue-button" type="button">Next</button>
+      </section>`);
   }
   
   function nextQuestion() {
@@ -184,5 +192,3 @@ $( document ).ready(function() {
   
   //when page loads, call handleSimpsonsQuiz;
   $(handleSimpsonsQuiz);
-  
-  });
