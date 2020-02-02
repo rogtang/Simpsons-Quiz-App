@@ -13,64 +13,32 @@
 <body>
     <div class="container">
     <header role="banner" class="header">
-        <h1>THE SIMPSONS</h1>
+        <a href="index.html">
+            <img class="logo" src="Images/The_Simpsons_-_logo.png" alt="The Simpsons logo"/>
+          </a>
     </header>
-<!-- Start/launch page -->
     <main class="main">
+      <div class="welcome">
+        <img class="springfieldImage" src="Images/Springfield.jpg" alt="Springfield"/>
         <section class="start-quiz">
         <h2>
-            How well do you know the citizens of Springfield? Click the doughnut to find out. Mmm, doughnut...
+            How well do you know the citizens of Springfield? Click the dounut to find out. Mmm, donut...
         </h2>
         </section>
+      </div>
         <section class="quiz-main">
         <form id="js-quiz-launch">
-            <button type="button" class="startButton">Start</button><br>
+            <input type="image" src="Images/Doughnut.jpg" alt="Start quiz" aria-pressed="false" class="start-btn"><br>
         </form>
-<!-- Quiz questions/answers -->        
-        <div class="quiz-question">
-            <h3>This is a question?</h3>
-            </div>
-        <form id="js-quiz-questions">
-            <fieldset>
-            <label class="answer-option">
-            <input type="radio" value="This is a question" name="answer" required>
-            <span>This is a question</span>
-            </label><br>
-            <label class="answer-option">
-                <input type="radio" value="This is a question" name="answer" required>
-                <span>This is a question</span>
-            </label><br>
-            <label class="answer-option">
-                <input type="radio" value="This is a question" name="answer" required>
-                <span>This is a question</span>
-            </label></br>
-            <label class="answer-option">
-                <input type="radio" value="This is a question" name="answer" required>
-                <span>This is a question</span>
-            </label></br>
-            <button type="submit" class="answer-submit">Submit</button>
-            </fieldset>
-            </form>
+        <form id="js-quiz-questions" class="hide">
+        </form>
+        <form id="js-quiz-response" class="hide">
+        </form>
         </section>  
-<!-- Answer feedback pages -->
-        <section class="feedback">
-        <div class="correctAnswer">Cowabunga! <br>
-        <button type=button class="nextButton">Press The Any Key</button>
-        </div>
-        <div class="wrongAnswer">D'oh!<br>
-        <button type=button class="nextButton">Press the Any Key</button>
-        </div>
-        </section>
-<!-- Overall score page -->
-        <div class="overallScore"><h3>Excellent...</h3>
-            <p>You got 8/ 10</p>
-            <button class="restartQuiz">Ready to try again?</button>
-        </div>
-<!-- Score tracker -->
-        <section class="js-quiz-results">
+        <section class="js-quiz-results hide">
             <ul>
                 <li>Question: <span class="questionNumber">0</span>/10</li>
-                <li>Score: <span class="score">0</span></li>
+                <li>Donuts eaten: <span class="score">0</span></li>
             </ul>
         </section>      
     </main>
