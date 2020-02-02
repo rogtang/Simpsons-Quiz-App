@@ -101,25 +101,25 @@ function generateQuestion() {
               <legend><span id='questionText'>${currentQuestion.question}</span></legend>
               
                   <label for='answerChoice1' class="answer">
-                    <input id='answerChoice1'  type='radio'  name='question' required autofocus>
+                    <input id='answerChoice1'  type='radio'  name='questionResponse' required>
                     <span class="answer">${currentQuestion.answers[0]}</span>
                   </label>
                 
                
                   <label for='answerChoice2' class="answer">
-                    <input id='answerChoice2'  type='radio'  name='question' required >
+                    <input id='answerChoice2'  type='radio'  name='questionResponse' required >
                     <span class="answer">${currentQuestion.answers[1]}</span>
                   </label>
                 
                 
                   <label for='answerChoice3' class="answer">
-                    <input id='answerChoice3'  type='radio'  name='question' required >
+                    <input id='answerChoice3'  type='radio'  name='questionResponse' required >
                     <span class="answer">${currentQuestion.answers[2]}</span>
                   </label>
                 
                 
                   <label for='answerChoice4' class="answer">
-                    <input id='answerChoice4'  type='radio'  name='question' required aria-required="true">
+                    <input id='answerChoice4'  type='radio'  name='questionResponse' required>
                     <span class="answer">${currentQuestion.answers[3]}</span>
                   </label>
                 
@@ -134,6 +134,36 @@ function generateQuestion() {
 
 function submitAnswer() {
   //this function will validate the answer submitted
+  let currentAnswer = $('input[name="questionResponse"]:checked').val();
+  let correct = STORE[questionNumber].correctAnswer;
+  $('.quiz-main').on('submit', function (event) {
+    event.preventDefault();
+    $('.js-quiz-questions').hide();
+    $('.js-quiz-response').show();
+    if (currentAnswer === correct) {
+      rightAnswer();
+      updateScore();
+    } else {
+      wrongAnswer();
+    }
+  });
+}
+
+function rightAnswer() {
+  //this function runs if answer is right
+}
+
+function wrongAnswer() {
+  //this function runs if answer is wrong
+
+}
+
+function nextQuestion() {
+  //this function shows next question
+}
+
+function restartQuiz() {
+  //this function restarts quiz at the end
 }
 
 
@@ -142,6 +172,8 @@ function handleSimpsonsQuiz() {
   startQuiz();
   generateQuestion();
   submitAnswer();
+  nextQuestion();
+  restartQuiz();
 }
 
 
