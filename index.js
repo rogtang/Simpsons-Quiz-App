@@ -1,5 +1,4 @@
-$( document ).ready(function() {
-  'use strict';
+'use strict';
   
   const STORE = [
   {
@@ -87,12 +86,12 @@ $( document ).ready(function() {
       generateQuestion();
       $('#js-quiz-questions').show();
       $('.js-quiz-results').show();
-      updateQuestionNumber();
     });
   }
   
-  
+  //TURN INTO A CONDITION IF/ELSE
   function generateQuestion() {
+    if (questionNumber < STORE.length) {
     const currentQuestion = STORE[questionNumber]
     $('#js-quiz-questions').html(
       `<section id="questionScreen">
@@ -102,80 +101,127 @@ $( document ).ready(function() {
                 <legend><span id='questionText'>${currentQuestion.question}</span></legend>
                 
                     <label for='answerChoice1' class="answer">
-                      <input id='answerChoice1'  type='radio'  name='questionResponse' required>
+                      <input id='answerChoice1'  type='radio'  name='questionResponse' value='${currentQuestion.answers[0]}' required>
                       <span class="answer">${currentQuestion.answers[0]}</span>
                     </label>
                   
                  
                     <label for='answerChoice2' class="answer">
-                      <input id='answerChoice2'  type='radio'  name='questionResponse' required >
+                      <input id='answerChoice2'  type='radio'  name='questionResponse' value='${currentQuestion.answers[1]}' required >
                       <span class="answer">${currentQuestion.answers[1]}</span>
                     </label>
                   
                   
                     <label for='answerChoice3' class="answer">
-                      <input id='answerChoice3'  type='radio'  name='questionResponse' required >
+                      <input id='answerChoice3'  type='radio'  name='questionResponse' value='${currentQuestion.answers[2]}' required >
                       <span class="answer">${currentQuestion.answers[2]}</span>
                     </label>
                   
                   
                     <label for='answerChoice4' class="answer">
-                      <input id='answerChoice4'  type='radio'  name='questionResponse' required>
+                      <input id='answerChoice4'  type='radio'  name='questionResponse' value='${currentQuestion.answers[3]}' required>
                       <span class="answer">${currentQuestion.answers[3]}</span>
                     </label>
                   
               </fieldset>
             </form>
-            <button id="submit-button" type="submit" form='answerChoices' value='submit'> Choose wisely...</button>
+            <button id="submit-button" type="submit" value='submit'>Submit</button>
             </section>`);
-  
+    } else {
+      $('#js-quiz-questions').hide();
+      $('#js-quiz-response').show();
+      finalResults();
+      $('.questionNumber').text(10)
+    }
   }
   
   
-  
+  //this function will validate the answer submitted
   function submitAnswer() {
-    //this function will validate the answer submitted
-    let currentAnswer = $('input[name="questionResponse"]:checked').val();
-    let correct = STORE[questionNumber].correctAnswer;
-    $('.quiz-main').on('submit', function (event) {
+    $('.quiz-main').on('submit', '#js-quiz-questions', (e) => {
+      console.log("it's working");
       event.preventDefault();
-      $('.js-quiz-questions').hide();
-      $('.js-quiz-response').show();
-      if (currentAnswer === correct) {
+      $('#js-quiz-questions').hide();
+      $('#js-quiz-response').show();
+      let selectedAnswer = $('input[name="questionResponse"]:checked').val();
+      let correct = STORE[questionNumber].correctAnswer;
+      if (selectedAnswer === correct) {
         rightAnswer();
         updateScore();
+        updateQuestionNumber();
       } else {
         wrongAnswer();
+        updateQuestionNumber();
       }
     });
   }
   
+  //this function runs if answer is right
   function rightAnswer() {
-    //this function runs if answer is right
-    //html
+    $('#js-quiz-response').html(
+      `<section id="correctScreen">
+    <p> Woohoo!</p>
+    <img class="cowabunga" src="Images/cowabunga_bart.jpg" alt="Bart">
+    <button class="nextButton" id="continue-button" type="button">Next</button>
+    </section>`);
   }
-  
+
+  //this function runs if answer is wrong
   function wrongAnswer() {
-    //this function runs if answer is wrong
-    //html
-  
+    $('#js-quiz-response').html(
+      `<section id="incorrectScreen">
+      <p> DOH! You must not be very S-M-R-T. It's actually ${STORE[questionNumber].correctAnswer}</p>
+      <img class="doh" src="Images/D-oh.jpg" alt="Homer">
+      <button class="nextButton" id="continue-button" type="button">Next</button>
+      </section>`);
   }
   
   function nextQuestion() {
     //this function shows next question
     //increment questionNumber ++, then call generateQuestion()
+    console.log(questionNumber);
+    $('.quiz-main').on('click', '.nextButton', (e) => {
+      console.log("it's not working");
+      event.preventDefault();
+      $('#js-quiz-response').hide();
+      $('#js-quiz-questions').show();
+      $('#nextButton').replaceWith(generateQuestion());
+    });
   }
   
+  function finalResults() {
+    console.log('final');
+    $('#js-quiz-response').html(
+      `<section id="resultsScreen">
+    <p>You got ${score} out of 10. We hope you enjoyed your visit to Springfield: The next best place to Shelbyville.</p>
+    <img class="cast" src="Images/Springfield_cast.jpg" alt="Simpsons cast">
+    <button class="restartButton" id="restart-button" type="button">Try Again</button>
+    </section>`);
+  }
+
+  function resetScore() {
+    score = 0;
+    questionNumber = 0;
+    $('.score').text(0);
+    $('.questionNumber').text(1);
+  }
+
   function restartQuiz() {
     //this function restarts quiz at the end
     //reset questionNumber = 0, score = 0
+    $('.quiz-main').on('click', '.restartButton', function (event) {
+    event.preventDefault();
+    $('#js-quiz-response').hide();
+    resetScore();
+    $('.welcome').show();
+    $('#js-quiz-launch').show();
+  });
   }
   
   
   //callback function
   function handleSimpsonsQuiz() {
     startQuiz();
-    generateQuestion();
     submitAnswer();
     nextQuestion();
     restartQuiz();
@@ -184,5 +230,3 @@ $( document ).ready(function() {
   
   //when page loads, call handleSimpsonsQuiz;
   $(handleSimpsonsQuiz);
-  
-  });
