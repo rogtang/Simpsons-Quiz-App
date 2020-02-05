@@ -170,7 +170,7 @@
   function wrongAnswer() {
     $('#js-quiz-response').html(
       `<section id="incorrectScreen">
-      <p> DOH! You must not be very S-M-R-T. It's actually ${STORE[questionNumber].correctAnswer}</p>
+      <p> I am so smart. S-M-R-T! It's actually ${STORE[questionNumber].correctAnswer}</p>
       <img class="doh" src="Images/D-oh.jpg" alt="Homer">
       <button class="nextButton" id="continue-button" type="button">Next</button>
       </section>`);
