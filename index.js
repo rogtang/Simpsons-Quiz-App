@@ -200,9 +200,11 @@
     $('.quiz-main').on('click', '.restartButton', function (event) {
     event.preventDefault();
     $('#js-quiz-response').hide();
-    resetScore();
+    $('.js-quiz-results').hide();
     $('.welcome').show();
     $('#js-quiz-launch').show();
+    resetScore();
+    updateQuestionNumber();
   });
   }
   
