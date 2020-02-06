@@ -3,68 +3,58 @@
   const STORE = [
   {
   question: 'What show did the Simpsons originally appear on in 1987?',
-  answers: [
-    'Saturday Night Live', 'The Tracey Ullman Show', 'Beavis and Butthead', 'The Tonight Show'],
+  answers: ['Saturday Night Live', 'The Tracey Ullman Show', 'Beavis and Butthead', 'The Tonight Show'],
   correctAnswer: 'The Tracey Ullman Show'
   },
   {
   question: 'What brand of beer is most commonly served at Moe’s Tavern?',
-  answers: [
-    'Bud Lite', 'Coors Light', 'Buzz', 'Duff'],
+  answers: ['Bud Lite', 'Coors Light', 'Buzz', 'Duff'],
   correctAnswer: 'Duff'
   },
   {
   question: 'What cocktail did Homer create?',
-  answers: [
-    'Flaming Homer', 'Jolting Homer', 'Happy Homer', 'Whisky Homer'],
+  answers: ['Flaming Homer', 'Jolting Homer', 'Happy Homer', 'Whisky Homer'],
   correctAnswer: 'Flaming Homer'
   },
   {
   question: 'Who founded Springfield?',
-  answers: [
-  'Abraham Springfield', 'Jebediah Springfield', 'Montgomery Springfield', 'Hans Moleman'],
+  answers: ['Abraham Springfield', 'Jebediah Springfield', 'Montgomery Springfield', 'Hans Moleman'],
   correctAnswer: 'Jebediah Springfield'
   },
   {
   question: 'What are the names of Marge’s twin sisters?',
-  answers: [
-  'Bonnie & Clydette', 'Thelma & Louise', 'Betty & Veronica', 'Patty & Selma'],
+  answers: ['Bonnie & Clydette', 'Thelma & Louise', 'Betty & Veronica', 'Patty & Selma'],
   correctAnswer: 'Patty & Selma'
   },
   {
   question: 'What street do the Simpsons live on?',
-  answers: [
-  'Woodlawn Avenue', 'Shelbyville Lane', 'Evergreen Terrace', 'Quimby Road'],
+  answers: ['Woodlawn Avenue', 'Shelbyville Lane', 'Evergreen Terrace', 'Quimby Road'],
   correctAnswer: 'Evergreen Terrace'
   },
   {
   question: 'Who shot Mr. Burns?',
-  answers: [
-  'Maggie Simpson', 'Homer Simpson', 'Lisa Simpson', 'Hans Moleman'],
+  answers: ['Maggie Simpson', 'Homer Simpson', 'Lisa Simpson', 'Hans Moleman'],
   correctAnswer: 'Maggie Simpson'
   },
   {
   question: 'Where does Milhouse’s dad work?',
-  answers: [
-  'The cracker factory', 'The nuclear power plant', 'The Leftorium', 'The Kwik-E-Mart'],
+  answers: ['The cracker factory', 'The nuclear power plant', 'The Leftorium', 'The Kwik-E-Mart'],
   correctAnswer: 'The cracker factory'
   },
   {
   question: 'What is Principal Skinner’s real name?',
-  answers: [
-  'Rainier Wolfcastle', 'Frank Grimes', 'Hugh Jass', 'Arman Tanzarian'],
+  answers: ['Rainier Wolfcastle', 'Frank Grimes', 'Hugh Jass', 'Arman Tanzarian'],
   correctAnswer: 'Arman Tanzarian'
   },
   {
   question: 'Who owns the world’s largest collection of Malibu Stacy dolls?',
-  answers: [
-  'Lisa Simpson', 'Jessica Lovejoy', 'Waylon Smithers', 'Milhouse Van Houten'],
+  answers: ['Lisa Simpson', 'Jessica Lovejoy', 'Waylon Smithers', 'Milhouse Van Houten'],
   correctAnswer: 'Waylon Smithers'
   }
   ];
   
   //variable store user results of quiz
-  let questionNumber = 0;
+  let questionNumber = 1;
   let score = 0;
   
   function updateScore() {
@@ -91,8 +81,8 @@
   
   //TURN INTO A CONDITION IF/ELSE
   function generateQuestion() {
-    if (questionNumber < STORE.length) {
-    const currentQuestion = STORE[questionNumber]
+    if (questionNumber <= STORE.length) {
+    const currentQuestion = STORE[questionNumber - 1]
     $('#js-quiz-questions').html(
       `<section id="questionScreen">
           
@@ -139,19 +129,18 @@
   //this function will validate the answer submitted
   function submitAnswer() {
     $('.quiz-main').on('submit', '#js-quiz-questions', (e) => {
-      console.log("it's working");
       event.preventDefault();
       $('#js-quiz-questions').hide();
       $('#js-quiz-response').show();
       let selectedAnswer = $('input[name="questionResponse"]:checked').val();
-      let correct = STORE[questionNumber].correctAnswer;
+      let correct = STORE[questionNumber - 1].correctAnswer;
       if (selectedAnswer === correct) {
         rightAnswer();
         updateScore();
-        updateQuestionNumber();
+        
       } else {
         wrongAnswer();
-        updateQuestionNumber();
+    
       }
     });
   }
@@ -170,7 +159,7 @@
   function wrongAnswer() {
     $('#js-quiz-response').html(
       `<section id="incorrectScreen">
-      <p> I am so smart. S-M-R-T! It's actually ${STORE[questionNumber].correctAnswer}</p>
+      <p> I am so smart. S-M-R-T! It's actually ${STORE[questionNumber - 1].correctAnswer}</p>
       <img class="doh" src="Images/D-oh.jpg" alt="Homer">
       <button class="nextButton" id="continue-button" type="button">Next</button>
       </section>`);
@@ -179,18 +168,17 @@
   function nextQuestion() {
     //this function shows next question
     //increment questionNumber ++, then call generateQuestion()
-    console.log(questionNumber);
     $('.quiz-main').on('click', '.nextButton', (e) => {
-      console.log("it's not working");
       event.preventDefault();
+      updateQuestionNumber();
       $('#js-quiz-response').hide();
       $('#js-quiz-questions').show();
       $('#nextButton').replaceWith(generateQuestion());
+      
     });
   }
   
   function finalResults() {
-    console.log('final');
     $('#js-quiz-response').html(
       `<section id="resultsScreen">
     <p>You got ${score} out of 10. We hope you enjoyed your visit to Springfield: The next best place to Shelbyville.</p>
